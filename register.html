@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #b84074, #8c0055);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.register-box {
+  background: white;
+  border-radius: 30px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.instruction {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid #333;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+.btn-register {
+  margin-top: 20px;
+  background-color: #a3005e;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 50%;
+  align-self: center;
+}
+
+.btn-register:hover {
+  background-color: #82014c;
+}
+
+    </style>
+</head>
+<body>
+<div class="register-container">
+  <div class="register-box">
+  <h1>GE-NEWS</h1>
+  <P class="subtitle">GENUSIAN NEWS</P>
+  <P class="instruction">Silahkan Registrasi Dengan Email Untuk Mengakses Website Ini</P>
+
+<form id="registerForm" action="Register.php" method="post">
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="Nama" placeholder="masukan nama" required>
+
+    <label for="alamat">Alamat</label>
+    <input type="text" id="alamat" name="Alamat" placeholder="masukan alamat" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="Email" placeholder="example@ac.id" required>
+
+    <label for="username">Username</label>
+    <input type="text" id="username" name="Username" placeholder="masukan username" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="Password" placeholder="masukan password" required>
+
+    <button type="submit" class="btn-register">Daftar</button>
+</form>
+  </div>
+</div>
+<script src="Koneksi.php"></script>
+</body>
+</html>

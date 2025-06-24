@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GeNews - Selamat Datang</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #b33c74, #800040);
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-weight: normal;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .get-started-button {
+      display: inline-block;
+      padding: 12px 32px;
+      background-color: #99004d;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .get-started-button:hover {
+      background-color: #b3005c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><strong>GE-NEWS</strong></h1>
+    <h2>GENUSIAN NEWS</h2>
+    <p><strong>Selamat Datang di GeNews – Portal Berita Terkini Seputar Dunia Kampus</strong></p>
+    <p>
+      GeNews hadir sebagai sumber informasi utama bagi mahasiswa, dosen, dan seluruh civitas akademika. 
+      Kami menyajikan berita terbaru seputar kehidupan kampus, kebijakan pendidikan tinggi, kegiatan mahasiswa, 
+      prestasi akademik, hingga tips dan inspirasi untuk menunjang kehidupan perkuliahan.
+    </p>
+    <p>
+      Terus ikuti GeNews dan tetap terhubung dengan perkembangan dunia kampus!
+    </p>
+
+    <a class="get-started-button" onclick="goToLogin()">Get Started</a>
+  </div>
+
+  <script>
+    function goToLogin() {
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hasil Pencarian</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #800020;
+    }
+
+    .berita-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+
+    .berita-item a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .berita-item a:hover {
+      color: #800020;
+    }
+
+    em {
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hasil Pencarian</h1>
+  <div id="results">Memuat hasil...</div>
+
+  <script>
+    const query = new URLSearchParams(window.location.search).get("q")?.toLowerCase() || "";
+    const beritaList = JSON.parse(localStorage.getItem("beritaList") || "[]");
+
+    const hasil = beritaList.filter(item =>
+      item.judul.toLowerCase().includes(query) ||
+      item.isi.toLowerCase().includes(query) ||
+      item.kategori.toLowerCase().includes(query)
+    );
+
+    const resultsDiv = document.getElementById("results");
+    if (hasil.length === 0) {
+      resultsDiv.innerHTML = `<p>Tidak ditemukan hasil untuk "<strong>${query}</strong>"</p>`;
+    } else {
+      resultsDiv.innerHTML = hasil.map(b => `
+        <div class="berita-item">
+          <h3><a href="detail.html?id=${b.id}">${b.judul}</a></h3>
+          <p><strong>Kategori:</strong> ${b.kategori}</p>
+          <p>${b.isi.substring(0, 100)}...</p>
+          <p><em>${b.tanggal}</em></p>
+        </div>
+      `).join("");
+    }
+  </script>
+</body>
+</html>

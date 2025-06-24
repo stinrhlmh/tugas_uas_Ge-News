@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Detail Berita</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #800020;
+    }
+
+    .tanggal, .kategori {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .isi {
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    a.kembali {
+      display: inline-block;
+      margin-top: 30px;
+      color: #800020;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a.kembali:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="detail">Memuat berita...</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const beritaList = JSON.parse(localStorage.getItem("beritaList") || "[]");
+    const berita = beritaList.find(b => b.id == id);
+
+    const container = document.getElementById("detail");
+
+    if (berita) {
+      container.innerHTML = `
+        <h1>${berita.judul}</h1>
+        <p class="kategori"><strong>Kategori:</strong> ${berita.kategori}</p>
+        <p class="tanggal"><em>${berita.tanggal}</em></p>
+        <hr>
+        <div class="isi">${berita.isi}</div>
+        <a href="dashboard.html" class="kembali">← Kembali ke dashboard</a>
+      `;
+    } else {
+      container.innerHTML = "<p>Berita tidak ditemukan.</p>";
+    }
+  </script>
+</body>
+</html>

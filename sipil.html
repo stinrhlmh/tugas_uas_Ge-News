@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Berita Teknik SIPIL</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f3f4f6;
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #800020;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+      color: #800020;
+    }
+
+    .card small {
+      color: #6b7280;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <h2>PORTAL BERITA PRODI TEKNIK SIPIL</h2>
+  <div id="newsContainer"></div>
+     <a href="dashboard.html"> <button>BACK</button>
+    <style>
+        button {
+      background-color: #800020;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 0%;}
+    </style>
+  <script>
+   const kategoriYangDitampilkan = "TEKNIK SIPIL"; // <- Ganti sesuai kategori
+    const beritaList = JSON.parse(localStorage.getItem('beritaList') || '[]').reverse();
+    const container = document.getElementById('newsContainer');
+
+    const beritaTerkategori = beritaList.filter(b => b.kategori === kategoriYangDitampilkan);
+
+    if (beritaTerkategori.length === 0) {
+      container.innerHTML = `<p style="text-align:center;">Belum ada berita ${kategoriYangDitampilkan.toLowerCase()}.</p>`;
+    } else {
+      beritaTerkategori.forEach(berita => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          ${berita.gambar ? `<img src="${berita.gambar}" alt="gambar">` : ''}
+          <h3>${berita.judul}</h3>
+          <small>${berita.tanggal}</small>
+          <p>${berita.isi}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

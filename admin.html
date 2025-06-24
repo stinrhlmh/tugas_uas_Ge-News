@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Input Berita</title>
+  <style>
+    body {
+      background-color: #f3f4f6;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #800020;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #800020;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #66001a;
+    }
+
+    #notif {
+      margin-top: 1rem;
+      color: green;
+      font-weight: 600;
+      display: none;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Halaman Admin - Tambah Berita</h1>
+
+    <!-- FORM INPUT BERITA -->
+    <form id="newsForm">
+      <label for="judul">Judul Berita</label>
+      <input type="text" id="judul" required />
+
+      <label for="isi">Isi Berita</label>
+      <textarea id="isi" rows="5" required></textarea>
+
+      <label for="kategori">PRODI</label>
+      <select id="kategori">
+        <option>TEKNIK MESIN</option>
+        <option>TEKNIK ELEKTRO</option>
+        <option>TEKNIK SIPIL</option>
+        <option>TEKNIK INFORMATIKA</option>
+        <option>SISTEM INFORMASI</option>
+        <option>PGSD</option>
+        <option>MANAJEMEN</option>
+        <option>HUKUM</option>
+        <option>AKUNANSI</option>
+        <option>DESAIN KOMUNIKASI VISUAL</option>
+        <option>NEWS</option>
+        <option>ACHIEVEMENT</option>
+      </select>
+
+      <button type="submit">Simpan Berita</button>
+    </form>
+
+    <div id="notif">Berita berhasil disimpan!</div>
+
+    <hr style="margin: 2rem 0;">
+
+    <!-- DAFTAR BERITA + HAPUS -->
+    <h2>Daftar Berita</h2>
+    <div id="listBeritaAdmin"></div>
+
+    <br>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Fungsi logout
+    function logout() {
+      localStorage.removeItem('currentUser');
+      window.location.href = "login.html";
+    }
+
+    // Submit berita
+    const form = document.getElementById('newsForm');
+    const notif = document.getElementById('notif');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+  const beritaBaru = {
+  id: Date.now(), // ID unik agar berita bisa dilacak
+  judul: document.getElementById('judul').value,
+  isi: document.getElementById('isi').value,
+  kategori: document.getElementById('kategori').value,
+  tanggal: new Date().toLocaleDateString()
+};
+
+
+      const beritaList = JSON.parse(localStorage.getItem('beritaList') || '[]');
+      beritaList.push(beritaBaru);
+      localStorage.setItem('beritaList', JSON.stringify(beritaList));
+
+      notif.style.display = 'block';
+      form.reset();
+      tampilkanBeritaAdmin();
+
+      setTimeout(() => {
+        notif.style.display = 'none';
+      }, 3000);
+    });
+
+    // Tampilkan berita
+    function tampilkanBeritaAdmin() {
+      const beritaList = JSON.parse(localStorage.getItem('beritaList') || '[]');
+      const listContainer = document.getElementById('listBeritaAdmin');
+      listContainer.innerHTML = '';
+
+      if (beritaList.length === 0) {
+        listContainer.innerHTML = '<p>Belum ada berita.</p>';
+        return;
+      }
+
+      beritaList.forEach((berita, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${berita.judul}</h3>
+          <small>${berita.tanggal}</small>
+          <p>${berita.isi}</p>
+          <p><strong>Kategori:</strong> ${berita.kategori}</p>
+          <button onclick="hapusBeritaAdmin(${index})">Hapus</button>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    // Hapus berita
+    function hapusBeritaAdmin(index) {
+      const beritaList = JSON.parse(localStorage.getItem('beritaList') || '[]');
+      if (confirm("Yakin ingin menghapus berita ini?")) {
+        beritaList.splice(index, 1);
+        localStorage.setItem('beritaList', JSON.stringify(beritaList));
+        tampilkanBeritaAdmin();
+      }
+    }
+
+    // Tampilkan saat halaman dibuka
+    tampilkanBeritaAdmin();
+  </script>
+</body>
+</html>
