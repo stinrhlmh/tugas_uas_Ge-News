@@ -4,4 +4,4 @@ Ini adalah tugas UAS dari pak Falentino dari matkul Pemograman Berorientasi Obje
 ![Tampilan Login](login.png)
 ![Tampilan Dashboard](dashboard.png)
 ![Tampilan Index](faculty.png)
-![Tampilan Login](admin.pnh)
+![Tampilan Login](admin.png)
